@@ -1,0 +1,24 @@
+spring:
+  flyway:
+    enabled: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/pizza_system?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+  mail:
+    host: localhost
+    port: 1025
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
