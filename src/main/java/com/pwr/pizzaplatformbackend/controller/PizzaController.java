@@ -21,6 +21,10 @@ import java.util.List;
 public class PizzaController {
     private final PizzaService pizzaService;
 
+    @GetMapping("/secured")
+    public String secured() {
+        return "secured";
+    }
     @GetMapping("/order/all")
     public ResponseEntity<List<BucketDto>> getAllOrders() {
         List<Bucket> buckets = pizzaService.getAllBuckets();
@@ -36,14 +40,17 @@ public class PizzaController {
     }
 
     @GetMapping("/pizza/{id}")
-    public Pizza getPizzaById(@PathVariable Long id) {
-        return pizzaService.findPizzaById(id);
+    public ResponseEntity<PizzaDto> getPizzaById(@PathVariable Long id) {
+        var pizza = pizzaService.findPizzaById(id);
+        var dto = new PizzaDto(pizza);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/get-order")
-    public Bucket getOrder() { //todo: change to get order by email
+    public ResponseEntity<BucketDto> getOrder() { //todo: change to get order by email
         var email = "example1@email.com";
-        return pizzaService.getUserOrder(email);
+        var dto = new BucketDto(pizzaService.getUserOrder(email));
+        return ResponseEntity.ok(dto);
     }
 
 }

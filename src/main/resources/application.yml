@@ -1,4 +1,17 @@
+user.pool.id: us-east-1_2HfXbVOoy
+
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            clientId: 5m5m87p2chmsf8rq8lj0q3d5e
+            scope: openid
+        provider:
+          cognito:
+            issuerUri: https://cognito-idp.us-east-1.amazonaws.com/${user.pool.id}
+
   flyway:
     enabled: false
 
@@ -16,9 +29,3 @@ spring:
   mail:
     host: localhost
     port: 1025
-
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
